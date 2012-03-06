@@ -1,0 +1,179 @@
+<configuration>
+  <!-- _TEMPLATE: This template file requires substitution of the following variables:
+       _TEMPLATE: _MASTER, _SLAVE (on single-node test, _MASTER == _SLAVE).
+       _TEMPLATE: -->
+   <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://_MASTER:9000</value>
+  </property>
+  <!-- configure 2 values for dfs.namenode.name.dir to avoid the following warning:
+    12/02/29 09:20:06 WARN namenode.FSNamesystem: Only one dfs.namenode.name.dir directory configured , beware data loss!
+
+    also seems to get rid of: 
+    12/02/29 09:20:06 WARN namenode.FSNamesystem: Only one dfs.namenode.edits.dir directory configured , beware data loss!
+
+    (though why a config that gets rid of a name.dir warning would also get rid
+      of a warning about edits.dir)
+
+    ..In fact, in NN web interface, both nn1 and nn2 are used to store IMAGE_AND_EDITS.
+  
+  -->
+  <property>
+    <name>dfs.namenode.name.dir</name>
+    <value>file:///tmp/hadoop/nn1,file:///tmp/hadoop/nn2</value>
+  </property>
+  <property>
+    <name>dfs.datanode.data.dir</name>
+    <value>file:///tmp/hadoop/dn</value>
+  </property>
+  <property>
+    <name>hadoop.tmp.dir</name>
+    <value>/tmp/hadoop/tmp</value>
+  </property>
+  <property>
+    <name>mapred.local.dir</name>
+    <value>${hadoop.tmp.dir}/mapred/local</value>
+  </property>
+  <property>
+    <name>mapreduce.cluster.local.dir</name>
+    <value>${hadoop.tmp.dir}/mapred/local</value>
+  </property>
+
+  <property>
+    <description>Address where the localizer IPC is.</description>
+    <name>yarn.nodemanager.localizer.address</name>
+    <value>_SLAVE:8042</value>
+  </property>
+
+  <property>
+    <name>yarn.nodemanager.local-dirs</name>
+    <value>/tmp/hadoop/nm-local-dirs</value>
+  </property>
+  <property>
+    <name>yarn.nodemanager.aux-services</name>
+    <value>mapreduce.shuffle</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.resource-tracker.address</name>
+    <value>_MASTER:8025</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.scheduler.address</name>
+    <value>_MASTER:8030</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.address</name>
+    <value>_MASTER:8040</value>
+  </property>
+  <property>
+    <name>mapreduce.framework.name</name>
+    <value>yarn</value>
+  </property>
+  <property>
+    <name>yarn.application.classpath</name>
+    <value>_HOME/hadoop-runtime/share/hadoop/common/*:_HOME/hadoop-runtime/share/hadoop/common/lib/*:_HOME/hadoop-runtime/share/hadoop/mapreduce/*:_HOME/hadoop-runtime/share/hadoop/mapreduce/lib/*:_HOME/hadoop-runtime/share/hadoop/hdfs/*:_HOME/hadoop-runtime/share/hadoop/hdfs/lib/*</value>
+  </property>
+  <property>
+    <name>hadoop.security.authentication</name>
+    <value>kerberos</value>
+  </property>
+  <property>
+    <name>hadoop.security.authorization</name>
+    <value>true</value>
+  </property>
+
+  <property>
+    <name>dfs.block.access.token.enable</name>
+    <value>true</value>
+  </property>
+
+  <property>
+    <name>dfs.https.enable</name>
+    <value>false</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.https-address</name>
+    <value>_MASTER:50470</value>
+  </property>
+
+  <property>
+    <name>dfs.https.port</name>
+    <value>50470</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.keytab.file</name>
+    <value>_HOME/hadoop-runtime/etc/hadoop/security/nn.keytab</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.kerberos.principal</name>
+    <value>nn/_MASTER@HADOOP.LOCALDOMAIN</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.kerberos.https.principal</name>
+    <value>host/_MASTER@HADOOP.LOCALDOMAIN</value>
+  </property>
+
+
+  <property>
+    <name>dfs.datanode.dat.dir.perm</name>
+    <value>700</value>
+  </property>
+  <property>
+    <name>dfs.datanode.address</name>
+    <value>0.0.0.0:1003</value>
+  </property>
+  <!-- needed? -->
+  <property>
+    <name>dfs.datanode.http.address</name>
+    <value>0.0.0.0:1004</value>
+  </property>
+<!--  <property>
+    <name>dfs.datanode.https.address</name>
+    <value>0.0.0.0:1005</value>
+  </property> -->
+  <property>
+    <name>dfs.datanode.keytab.file</name>
+    <value>_HOME/hadoop-runtime/etc/hadoop/security/dn.keytab</value>
+  </property>
+  <property>
+    <name>dfs.datanode.kerberos.principal</name>
+    <value>dn/_SLAVE@HADOOP.LOCALDOMAIN</value>
+  </property>
+  <property>
+    <name>dfs.datanode.kerberos.https.principal</name>
+    <value>host/_SLAVE@HADOOP.LOCALDOMAIN</value>
+  </property>
+
+  <!-- YARN ResourceManager -->
+
+  <property>
+    <name>yarn.resourcemanager.keytab</name>
+    <value>_HOME/hadoop-runtime/etc/hadoop/security/rm.keytab</value>
+  </property>
+
+  <property>
+    <name>yarn.resourcemanager.principal</name>
+    <value>rm/_MASTER@HADOOP.LOCALDOMAIN</value>
+  </property>
+
+  <!-- YARN NodeManager -->
+  <property>
+    <name>yarn.nodemanager.keytab</name>
+    <value>_HOME/hadoop-runtime/etc/hadoop/security/nm.keytab</value>
+  </property>
+
+  <property>
+    <name>yarn.nodemanager.principal</name>
+    <value>nm/_SLAVE@HADOOP.LOCALDOMAIN</value>
+  </property>
+
+  <property>
+    <name>yarn.nodemanager.delete.debug-delay-sec</name>
+    <value>10000000</value>
+  </property>
+
+</configuration>  
