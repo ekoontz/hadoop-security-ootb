@@ -3,6 +3,7 @@
 
 if [ $EUID != 0 ]; then
     echo "you must be root to run this."
+    exit
 fi
 
 bin=`which $0`
