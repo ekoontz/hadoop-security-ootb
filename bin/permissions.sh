@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
-# run as root
 # idempotent: can be run repeatedly with a consistent end state.
-bin=/home/ec2-user/hadoop-runtime/bin
+
+if [ $EUID != 0 ]; then
+    echo "you must be root to run this."
+fi
+
+bin=`which $0`
+bin=`dirname ${bin}`
+bin=`cd "$bin"; pwd`
 
 REALM=HADOOP.LOCALDOMAIN
 KEYTAB_DIR=/home/ec2-user/hadoop-runtime/etc/hadoop/security
