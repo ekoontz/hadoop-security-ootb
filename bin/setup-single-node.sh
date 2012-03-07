@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-ETC=$HOME/hadoop-runtime/etc/hadoop
+bin=`which $0`
+bin=`dirname ${bin}`
+bin=`cd "$bin"; pwd`
+
+ETC=$bin/../etc/hadoop
 cat $ETC/core-site.template.xml | sed s/_MASTER/`hostname -f`/g \
 | sed s/_SLAVE/`hostname -f`/g \
 | grep -v _TEMPLATE \

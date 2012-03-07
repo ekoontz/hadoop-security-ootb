@@ -11,7 +11,7 @@ bin=`dirname ${bin}`
 bin=`cd "$bin"; pwd`
 
 REALM=HADOOP.LOCALDOMAIN
-KEYTAB_DIR=/home/ec2-user/hadoop-runtime/etc/hadoop/security
+KEYTAB_DIR=$bin/../etc/hadoop/security
 HOST=`hostname -f`
 
 #Part 1: users,groups, and principals.
@@ -37,8 +37,13 @@ mkdir -m 755 /tmp/yarn-nm-local
 mkdir -m 755 /tmp/yarn-nm-log
 chown yarn:hadoop /tmp/yarn-log /tmp/yarn-nm-local /tmp/yarn-nm-log
 
-mkdir -m 700 -p $KEYTAB_DIR
+mkdir -m 750 -p $KEYTAB_DIR
 chown hdfs:hadoop $KEYTAB_DIR
+chmod -R 750 $KEYTAB_DIR
+
+LOG_DIR=$bin/../logs
+chown hdfs:hadoop $LOG_DIR
+chmod -R 770 hdfs:hadoop $LOG_DIR
 
 echo "delprinc -force host/$HOST@$REALM"  | kadmin.local
 echo "delprinc -force   nn/$HOST@$REALM"  | kadmin.local
