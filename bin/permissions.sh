@@ -19,12 +19,14 @@ HOST=`hostname -f`
 adduser hdfs
 adduser yarn
 adduser mapred
-
+adduser host
 groupadd hadoop
 
 usermod -a -G hadoop hdfs
 usermod -a -G hadoop yarn
 usermod -a -G hadoop mapred
+usermod -a -G supergroup host
+
 
 mkdir -m 700 /tmp/hadoop-nn
 mkdir -m 700 /tmp/hdfs-nn
