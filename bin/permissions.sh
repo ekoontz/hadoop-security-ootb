@@ -45,8 +45,9 @@ chown hdfs:hadoop $KEYTAB_DIR
 chmod -R 750 $KEYTAB_DIR
 
 LOG_DIR=$bin/../logs
+mkdir -p $LOG_DIR
 chown hdfs:hadoop $LOG_DIR
-chmod -R 770 hdfs:hadoop $LOG_DIR
+chmod -R 770 $LOG_DIR
 
 echo "delprinc -force host/$HOST@$REALM"  | kadmin.local
 echo "delprinc -force hdfs/$HOST@$REALM"  | kadmin.local

@@ -8,7 +8,7 @@ $bin/setup-single-node.sh
 sudo $bin/permissions.sh 
 $bin/start-hdfs.sh
 $bin/start-yarn.sh
-#sudo su hdfs -c "JAVA_HOME=$JAVA_HOME $bin/hdfs-permissions.sh"
+sudo su hdfs -c "JAVA_HOME=$JAVA_HOME $bin/hdfs-permissions.sh"
 
 sudo mkdir /tmp/hadoop/tmp
 sudo chown -R hdfs:hadoop /tmp/hadoop/tmp
