@@ -11,6 +11,7 @@ sudo $bin/permissions.sh
 
 $bin/start-hdfs.sh
 $bin/start-yarn.sh
+export JAVA_HOME=/usr/lib/jvm/jre-openjdk
 sudo su hdfs -c "JAVA_HOME=$JAVA_HOME $bin/hdfs-permissions.sh"
 
 sudo mkdir /tmp/hadoop/tmp
