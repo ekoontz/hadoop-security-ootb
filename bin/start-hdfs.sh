@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # no secondary namenode yet.
-set -x
 
 bin=`which $0`
 bin=`dirname ${bin}`

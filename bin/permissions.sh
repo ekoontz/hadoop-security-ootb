@@ -28,7 +28,6 @@ usermod -a -G hadoop yarn
 usermod -a -G hadoop mapred
 usermod -a -G supergroup host
 
-
 mkdir -m 700 /tmp/hadoop-nn
 mkdir -m 700 /tmp/hdfs-nn
 mkdir -m 700 /tmp/hdfs-dn

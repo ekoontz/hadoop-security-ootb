@@ -8,9 +8,22 @@ fi
 
 /etc/init.d/krb5kdc stop
 
+mv /etc/krb5.conf /etc/krb5.conf.save
+cp etc/hadoop/krb5.conf /etc/
+
+rm -rf /var/kerberos.save
+mv /var/kerberos /var/kerberos.save
+
+mkdir -m 755 -p /var/kerberos
+chown root:root /var/kerberos
+mkdir -m 755 -p /var/kerberos/krb5kdc
+chown root:root /var/kerberos/krb5kdc
+
 yum -y install krb5-server
 
 kdb5_util create -r HADOOP.LOCALDOMAIN -s
+
+cp etc/hadoop/kdc.conf  /var/kerberos/krb5kdc
 
 /etc/init.d/krb5kdc start
 
