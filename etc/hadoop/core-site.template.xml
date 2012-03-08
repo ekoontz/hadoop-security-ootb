@@ -71,7 +71,7 @@
   </property>
   <property>
     <name>yarn.application.classpath</name>
-    <value>_HOME/hadoop-runtime/share/hadoop/common/*:_HOME/hadoop-runtime/share/hadoop/common/lib/*:_HOME/hadoop-runtime/share/hadoop/mapreduce/*:_HOME/hadoop-runtime/share/hadoop/mapreduce/lib/*:_HOME/hadoop-runtime/share/hadoop/hdfs/*:_HOME/hadoop-runtime/share/hadoop/hdfs/lib/*</value>
+    <value>/usr/lib/hadoop/share/hadoop/common/*:/usr/lib/hadoop/share/hadoop/common/lib/*:/usr/lib/hadoop/share/hadoop/mapreduce/*:/usr/lib/hadoop/share/hadoop/mapreduce/lib/*:/usr/lib/hadoop/share/hadoop/hdfs/*:/usr/lib/hadoop/share/hadoop/hdfs/lib/*</value>
   </property>
   <property>
     <name>hadoop.security.authentication</name>
@@ -104,12 +104,12 @@
 
   <property>
     <name>dfs.namenode.keytab.file</name>
-    <value>_HOME/hadoop-runtime/etc/hadoop/security/nn.keytab</value>
+    <value>/usr/lib/hadoop/etc/hadoop/security/hdfs.keytab</value>
   </property>
 
   <property>
     <name>dfs.namenode.kerberos.principal</name>
-    <value>nn/_MASTER@HADOOP.LOCALDOMAIN</value>
+    <value>hdfs/_MASTER@HADOOP.LOCALDOMAIN</value>
   </property>
 
   <property>
@@ -137,11 +137,11 @@
   </property> -->
   <property>
     <name>dfs.datanode.keytab.file</name>
-    <value>_HOME/hadoop-runtime/etc/hadoop/security/dn.keytab</value>
+    <value>/usr/lib/hadoop/etc/hadoop/security/hdfs.keytab</value>
   </property>
   <property>
     <name>dfs.datanode.kerberos.principal</name>
-    <value>dn/_SLAVE@HADOOP.LOCALDOMAIN</value>
+    <value>hdfs/_SLAVE@HADOOP.LOCALDOMAIN</value>
   </property>
   <property>
     <name>dfs.datanode.kerberos.https.principal</name>
@@ -152,23 +152,23 @@
 
   <property>
     <name>yarn.resourcemanager.keytab</name>
-    <value>_HOME/hadoop-runtime/etc/hadoop/security/rm.keytab</value>
+    <value>/usr/lib/hadoop/etc/hadoop/security/yarn.keytab</value>
   </property>
 
   <property>
     <name>yarn.resourcemanager.principal</name>
-    <value>rm/_MASTER@HADOOP.LOCALDOMAIN</value>
+    <value>yarn/_MASTER@HADOOP.LOCALDOMAIN</value>
   </property>
 
   <!-- YARN NodeManager -->
   <property>
     <name>yarn.nodemanager.keytab</name>
-    <value>_HOME/hadoop-runtime/etc/hadoop/security/nm.keytab</value>
+    <value>/usr/lib/hadoop/etc/hadoop/security/yarn.keytab</value>
   </property>
 
   <property>
     <name>yarn.nodemanager.principal</name>
-    <value>nm/_SLAVE@HADOOP.LOCALDOMAIN</value>
+    <value>yarn/_SLAVE@HADOOP.LOCALDOMAIN</value>
   </property>
 
   <property>

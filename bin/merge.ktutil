@@ -1,26 +1,14 @@
-rkt _KEYTAB_DIR/nn.keytab
+rkt _KEYTAB_DIR/hdfs.keytab
 rkt _KEYTAB_DIR/host.keytab
-wkt _KEYTAB_DIR/nn.keytab
-
-rkt _KEYTAB_DIR/sn.keytab
-rkt _KEYTAB_DIR/host.keytab
-wkt _KEYTAB_DIR/sn.keytab
-
-rkt _KEYTAB_DIR/dn.keytab
-rkt _KEYTAB_DIR/host.keytab
-wkt _KEYTAB_DIR/dn.keytab
+wkt _KEYTAB_DIR/hdfs.keytab
 
 rkt _KEYTAB_DIR/wap.keytab
 rkt _KEYTAB_DIR/host.keytab
 wkt _KEYTAB_DIR/wap.keytab
 
-rkt _KEYTAB_DIR/nm.keytab
+rkt _KEYTAB_DIR/yarn.keytab
 rkt _KEYTAB_DIR/host.keytab
-wkt _KEYTAB_DIR/nm.keytab
-
-rkt _KEYTAB_DIR/rm.keytab
-rkt _KEYTAB_DIR/host.keytab
-wkt _KEYTAB_DIR/rm.keytab
+wkt _KEYTAB_DIR/yarn.keytab
 
 rkt _KEYTAB_DIR/jhs.keytab
 rkt _KEYTAB_DIR/host.keytab

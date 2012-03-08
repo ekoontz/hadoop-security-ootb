@@ -21,6 +21,7 @@ adduser yarn
 adduser mapred
 adduser host
 groupadd hadoop
+groupadd supergroup
 
 usermod -a -G hadoop hdfs
 usermod -a -G hadoop yarn
@@ -48,58 +49,42 @@ chown hdfs:hadoop $LOG_DIR
 chmod -R 770 hdfs:hadoop $LOG_DIR
 
 echo "delprinc -force host/$HOST@$REALM"  | kadmin.local
-echo "delprinc -force   nn/$HOST@$REALM"  | kadmin.local
-echo "delprinc -force   sn/$HOST@$REALM"  | kadmin.local
-echo "delprinc -force   dn/$HOST@$REALM"  | kadmin.local
+echo "delprinc -force hdfs/$HOST@$REALM"  | kadmin.local
 echo "delprinc -force  wap/$HOST@$REALM"  | kadmin.local
-echo "delprinc -force   rm/$HOST@$REALM"  | kadmin.local
-echo "delprinc -force   nm/$HOST@$REALM"  | kadmin.local
+echo "delprinc -force   yarn/$HOST@$REALM"  | kadmin.local
 echo "delprinc -force  jhs/$HOST@$REALM"  | kadmin.local
 
 echo "addprinc -randkey host/$HOST@$REALM"  | kadmin.local
-echo "addprinc -randkey   nn/$HOST@$REALM"  | kadmin.local
-echo "addprinc -randkey   sn/$HOST@$REALM"  | kadmin.local
-echo "addprinc -randkey   dn/$HOST@$REALM"  | kadmin.local
+echo "addprinc -randkey hdfs/$HOST@$REALM"  | kadmin.local
 echo "addprinc -randkey  wap/$HOST@$REALM"  | kadmin.local
-echo "addprinc -randkey   rm/$HOST@$REALM"  | kadmin.local
-echo "addprinc -randkey   nm/$HOST@$REALM"  | kadmin.local
+echo "addprinc -randkey  yarn/$HOST@$REALM"  | kadmin.local
 echo "addprinc -randkey  jhs/$HOST@$REALM"  | kadmin.local
 
 echo "modprinc -maxrenewlife 1hour       host/$HOST@$REALM" | kadmin.local
-echo "modprinc -maxrenewlife 1hour         nn/$HOST@$REALM" | kadmin.local
-echo "modprinc -maxrenewlife 1hour         sn/$HOST@$REALM" | kadmin.local
-echo "modprinc -maxrenewlife 1hour         dn/$HOST@$REALM" | kadmin.local
+echo "modprinc -maxrenewlife 1hour       hdfs/$HOST@$REALM" | kadmin.local
 echo "modprinc -maxrenewlife 1hour        wap/$HOST@$REALM" | kadmin.local
-echo "modprinc -maxrenewlife 1hour         rm/$HOST@$REALM" | kadmin.local
-echo "modprinc -maxrenewlife 1hour         nm/$HOST@$REALM" | kadmin.local
+echo "modprinc -maxrenewlife 1hour       yarn/$HOST@$REALM" | kadmin.local
 echo "modprinc -maxrenewlife 1hour        jhs/$HOST@$REALM" | kadmin.local
 
 
 #Part 2: keytabs
 #throw out existing hadoop keytab files, if any
-rm -f $KEYTAB_DIR/host.keytab $KEYTAB_DIR/nn.keytab $KEYTAB_DIR/sn.keytab \
-      $KEYTAB_DIR/dn.keytab $KEYTAB_DIR/wap.keytab \
-      $KEYTAB_DIR/rm.keytab $KEYTAB_DIR/nm.keytab \
-      $KEYTAB_DIR/jhs.keytab
+rm -f $KEYTAB_DIR/hdfs.keytab $KEYTAB_DIR/wap.keytab \
+      $KEYTAB_DIR/yarn.keytab $KEYTAB_DIR/jhs.keytab
 
 echo "ktadd -k $KEYTAB_DIR/host.keytab host/$HOST@$REALM" | kadmin.local
-echo "ktadd -k $KEYTAB_DIR/nn.keytab nn/$HOST@$REALM"     | kadmin.local
-echo "ktadd -k $KEYTAB_DIR/sn.keytab sn/$HOST@$REALM"     | kadmin.local
-echo "ktadd -k $KEYTAB_DIR/dn.keytab dn/$HOST@$REALM"     | kadmin.local
-echo "ktadd -k $KEYTAB_DIR/wap.keytab wap/$HOST@$REALM"   | kadmin.local
-echo "ktadd -k $KEYTAB_DIR/rm.keytab rm/$HOST@$REALM"     | kadmin.local
-echo "ktadd -k $KEYTAB_DIR/nm.keytab nm/$HOST@$REALM"     | kadmin.local
-echo "ktadd -k $KEYTAB_DIR/jhs.keytab jhs/$HOST@$REALM"   | kadmin.local
+echo "ktadd -k $KEYTAB_DIR/hdfs.keytab hdfs/$HOST@$REALM" | kadmin.local
+echo "ktadd -k $KEYTAB_DIR/wap.keytab   wap/$HOST@$REALM"   | kadmin.local
+echo "ktadd -k $KEYTAB_DIR/yarn.keytab yarn/$HOST@$REALM"   | kadmin.local
+echo "ktadd -k $KEYTAB_DIR/jhs.keytab   jhs/$HOST@$REALM"   | kadmin.local
 
 cat $bin/merge.ktutil | perl -pe "s|_KEYTAB_DIR|$KEYTAB_DIR|g" | ktutil
 
 chown hdfs:hadoop $KEYTAB_DIR/host.keytab \
-$KEYTAB_DIR/nn.keytab $KEYTAB_DIR/sn.keytab $KEYTAB_DIR/dn.keytab \
-$KEYTAB_DIR/wap.keytab \
-$KEYTAB_DIR/rm.keytab $KEYTAB_DIR/nm.keytab $KEYTAB_DIR/jhs.keytab 
+$KEYTAB_DIR/wap.keytab $KEYTAB_DIR/yarn.keytab $KEYTAB_DIR/jhs.keytab  \
+$KEYTAB_DIR/hdfs.keytab
 
 chmod 660 $KEYTAB_DIR/host.keytab \
-$KEYTAB_DIR/nn.keytab $KEYTAB_DIR/sn.keytab $KEYTAB_DIR/dn.keytab \
-$KEYTAB_DIR/wap.keytab \
-$KEYTAB_DIR/rm.keytab $KEYTAB_DIR/nm.keytab $KEYTAB_DIR/jhs.keytab
+$KEYTAB_DIR/wap.keytab $KEYTAB_DIR/yarn.keytab $KEYTAB_DIR/jhs.keytab \
+$KEYTAB_DIR/hdfs.keytab
 

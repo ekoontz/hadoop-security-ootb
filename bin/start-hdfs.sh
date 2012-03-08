@@ -21,6 +21,7 @@ sudo pkill -f DataNode
 
 #wipe out existing install, if any.
 sudo rm -rf /tmp/hadoop/*
+JAVA_HOME=/usr/java/latest
 sudo su hdfs -c "JAVA_HOME=$JAVA_HOME $bin/hdfs namenode -format"
 
 sudo su hdfs -c "HADOOP_CLASSPATH=$HADOOP_CLASSPATH HADOOP_USER_CLASSPATH_FIRST=true JAVA_HOME=$JAVA_HOME $bin/hdfs namenode &"

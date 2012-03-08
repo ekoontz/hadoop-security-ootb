@@ -11,8 +11,8 @@ $bin/start-yarn.sh
 sudo echo 
 
 #finally, set permissions.
-#first, set up credentials so that we have nn's permission to modify HDFS.
-kinit -k -t $bin/../etc/hadoop/security/nn.keytab nn/`hostname -f`@HADOOP.LOCALDOMAIN
+#first, set up credentials so that we have hdfs's permission to modify HDFS.
+kinit -k -t $bin/../etc/hadoop/security/hdfs.keytab hdfs/`hostname -f`@HADOOP.LOCALDOMAIN
 kinit -R
 
 bin/hadoop fs -chmod 755 hdfs://`hostname -f`:9000/

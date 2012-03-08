@@ -3,7 +3,15 @@ bin=`which $0`
 bin=`dirname ${bin}`
 bin=`cd "$bin"; pwd`
 
-$bin/krb5.sh
+sudo $bin/krb5.sh
 $bin/setup-single-node.sh 
 sudo $bin/permissions.sh 
-$bin/runall-secure.sh
+$bin/start-hdfs.sh
+$bin/start-yarn.sh
+#sudo su hdfs -c "JAVA_HOME=$JAVA_HOME $bin/hdfs-permissions.sh"
+
+sudo mkdir /tmp/hadoop/tmp
+sudo chown -R hdfs:hadoop /tmp/hadoop/tmp
+sudo chmod -R 775 /tmp/hadoop/tmp
+
+
