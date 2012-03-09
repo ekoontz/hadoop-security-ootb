@@ -1,15 +1,30 @@
-#!/usr/bin/env bash                                                                                                                                       
+#!/usr/bin/env bash                                                                         
+set -x
+if [ -z $MASTER ]; then
+    echo "you must define \$MASTER in your environment."
+    exit
+fi
+                                                              
 bin=`which $0`
 bin=`dirname ${bin}`
 bin=`cd "$bin"; pwd`
 
-ETC=$bin/../etc/hadoop
-cat $ETC/core-site.template.xml | sed s/\\\${MASTER}/$MASTER/g \
-| sed s/\\\${SLAVE}/`hostname -f`/g \
-| grep -v _TEMPLATE > $ETC/core-site.xml
+LOCAL_ETC=$bin/../etc/hadoop
+HADOOP_ETC=/usr/lib/hadoop/etc/hadoop
+ETC=/etc
 
-mv $ETC/hdfs-site.xml /tmp
-ln -s $ETC/core-site.xml $ETC/hdfs-site.xml
-mv $ETC/yarn-site.xml /tmp
-ln -s $ETC/core-site.xml $ETC/yarn-site.xml
+cat $LOCAL_ETC/krb5.conf | sed s/\\\${MASTER_HOST}/`hostname -f`/  > $ETC/krb5.conf
+
+cat $LOCAL_ETC/core-site.template.xml | sed s/\\\${MASTER}/$MASTER/g \
+| sed s/\\\${SLAVE}/`hostname -f`/g \
+| grep -v _TEMPLATE > $HADOOP_ETC/core-site.xml
+
+mv $HADOOP_ETC/hdfs-site.xml /tmp
+ln -s $HADOOP_ETC/core-site.xml $HADOOP_ETC/hdfs-site.xml
+mv $HADOOP_ETC/yarn-site.xml /tmp
+ln -s $HADOOP_ETC/core-site.xml $HADOOP_ETC/yarn-site.xml
+
+sudo rm /usr/lib/hadoop/etc/hadoop/security/*.keytab
+sudo scp -i /home/ec2-user/.ssh/ms-shared ec2-user@$MASTER:hadoop-security-ootb/etc/hdfs.slave.keytab /usr/lib/hadoop/etc/hadoop/security/hdfs.keytab
+
 
