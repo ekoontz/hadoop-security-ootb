@@ -1,10 +1,10 @@
 <configuration>
   <!-- _TEMPLATE: This template file requires substitution of the following variables:
-       _TEMPLATE: _MASTER, _SLAVE (on single-node test, _MASTER == _SLAVE).
+       _TEMPLATE: ${MASTER}, ${SLAVE} (on single-node test, ${MASTER} == ${SLAVE}).
        _TEMPLATE: -->
    <property>
     <name>fs.defaultFS</name>
-    <value>hdfs://_MASTER:9000</value>
+    <value>hdfs://${MASTER}:9000</value>
   </property>
   <!-- configure 2 values for dfs.namenode.name.dir to avoid the following warning:
     12/02/29 09:20:06 WARN namenode.FSNamesystem: Only one dfs.namenode.name.dir directory configured , beware data loss!
@@ -42,7 +42,7 @@
   <property>
     <description>Address where the localizer IPC is.</description>
     <name>yarn.nodemanager.localizer.address</name>
-    <value>_SLAVE:8042</value>
+    <value>${SLAVE}:8042</value>
   </property>
 
   <property>
@@ -55,15 +55,15 @@
   </property>
   <property>
     <name>yarn.resourcemanager.resource-tracker.address</name>
-    <value>_MASTER:8025</value>
+    <value>${MASTER}:8025</value>
   </property>
   <property>
     <name>yarn.resourcemanager.scheduler.address</name>
-    <value>_MASTER:8030</value>
+    <value>${MASTER}:8030</value>
   </property>
   <property>
     <name>yarn.resourcemanager.address</name>
-    <value>_MASTER:8040</value>
+    <value>${MASTER}:8040</value>
   </property>
   <property>
     <name>mapreduce.framework.name</name>
@@ -94,7 +94,7 @@
 
   <property>
     <name>dfs.namenode.https-address</name>
-    <value>_MASTER:50470</value>
+    <value>${MASTER}:50470</value>
   </property>
 
   <property>
@@ -109,12 +109,12 @@
 
   <property>
     <name>dfs.namenode.kerberos.principal</name>
-    <value>hdfs/_MASTER@HADOOP.LOCALDOMAIN</value>
+    <value>hdfs/${MASTER}@HADOOP.LOCALDOMAIN</value>
   </property>
 
   <property>
     <name>dfs.namenode.kerberos.https.principal</name>
-    <value>host/_MASTER@HADOOP.LOCALDOMAIN</value>
+    <value>host/${MASTER}@HADOOP.LOCALDOMAIN</value>
   </property>
 
 
@@ -141,11 +141,11 @@
   </property>
   <property>
     <name>dfs.datanode.kerberos.principal</name>
-    <value>hdfs/_SLAVE@HADOOP.LOCALDOMAIN</value>
+    <value>hdfs/${SLAVE}@HADOOP.LOCALDOMAIN</value>
   </property>
   <property>
     <name>dfs.datanode.kerberos.https.principal</name>
-    <value>host/_SLAVE@HADOOP.LOCALDOMAIN</value>
+    <value>host/${SLAVE}@HADOOP.LOCALDOMAIN</value>
   </property>
 
   <!-- YARN ResourceManager -->
@@ -157,7 +157,7 @@
 
   <property>
     <name>yarn.resourcemanager.principal</name>
-    <value>yarn/_MASTER@HADOOP.LOCALDOMAIN</value>
+    <value>yarn/${MASTER}@HADOOP.LOCALDOMAIN</value>
   </property>
 
   <!-- YARN NodeManager -->
@@ -168,7 +168,7 @@
 
   <property>
     <name>yarn.nodemanager.principal</name>
-    <value>yarn/_SLAVE@HADOOP.LOCALDOMAIN</value>
+    <value>yarn/${SLAVE}@HADOOP.LOCALDOMAIN</value>
   </property>
 
   <property>
