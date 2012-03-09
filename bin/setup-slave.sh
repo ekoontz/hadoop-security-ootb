@@ -4,7 +4,7 @@ if [ -z $MASTER ]; then
     exit
 fi
 SSH_PRIVATE_KEY=/usr/lib/hadoop/etc/hadoop/security/ms-shared
-if [ !-f $SSH_PRIVATE_KEY ]; then
+if [ ! -f $SSH_PRIVATE_KEY ]; then
     echo "you must have the master's private key in SSH_PRIVATE_KEY so that the keytab may be fetched."
     exit
 fi
