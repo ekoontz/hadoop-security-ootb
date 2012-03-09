@@ -109,12 +109,12 @@
 
   <property>
     <name>dfs.namenode.kerberos.principal</name>
-    <value>hdfs/${MASTER}@HADOOP.LOCALDOMAIN</value>
+    <value>hdfs/_HOST@HADOOP.LOCALDOMAIN</value>
   </property>
 
   <property>
     <name>dfs.namenode.kerberos.https.principal</name>
-    <value>host/${MASTER}@HADOOP.LOCALDOMAIN</value>
+    <value>host/_HOST@HADOOP.LOCALDOMAIN</value>
   </property>
 
 
