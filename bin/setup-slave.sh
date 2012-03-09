@@ -3,9 +3,9 @@ if [ -z $MASTER ]; then
     echo "you must define \$MASTER in your environment."
     exit
 fi
-
-if [ !-f $HOME/.ssh/ms-shared ]; then
-    echo "you must have the master's private key in $HOME/.ssh so that the keytab may be fetched."
+SSH_PRIVATE_KEY=/usr/lib/hadoop/etc/hadoop/security/ms-shared
+if [ !-f $SSH_PRIVATE_KEY ]; then
+    echo "you must have the master's private key in SSH_PRIVATE_KEY so that the keytab may be fetched."
     exit
 fi
 
@@ -13,7 +13,6 @@ fi
 bin=`which $0`
 bin=`dirname ${bin}`
 bin=`cd "$bin"; pwd`
->>>>>>> github-write/master
 
 LOCAL_ETC=$bin/../etc/hadoop
 HADOOP_ETC=/usr/lib/hadoop/etc/hadoop
@@ -31,7 +30,8 @@ mv $HADOOP_ETC/yarn-site.xml /tmp
 ln -s $HADOOP_ETC/core-site.xml $HADOOP_ETC/yarn-site.xml
 
 sudo rm /usr/lib/hadoop/etc/hadoop/security/*.keytab
-sudo scp -i /home/ec2-user/.ssh/ms-shared ec2-user@$MASTER:hadoop-security-ootb/etc/hdfs.slave.keytab /usr/lib/hadoop/etc/hadoop/security/hdfs.keytab
+sudo mkdir -p /usr/lib/hadoop/etc/hadoop/security
+sudo scp -i $SSH_PRIVATE_KEY ec2-user@$MASTER:hadoop-security-ootb/etc/hdfs.slave.keytab /usr/lib/hadoop/etc/hadoop/security/hdfs.keytab
 
 #test that keytab works.
 set -x
