@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-bin=`which $0`
-bin=`dirname ${bin}`
-bin=`cd "$bin"; pwd`
+bin=/usr/lib/hadoop/bin
 
 export HADOOP_SECURE_DN_USER=hdfs
 #wipe out existing install, if any.
