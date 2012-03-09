@@ -11,7 +11,8 @@ bin=`dirname ${bin}`
 bin=`cd "$bin"; pwd`
 
 REALM=HADOOP.LOCALDOMAIN
-KEYTAB_DIR=$bin/../etc/hadoop/security
+KEYTAB_DIR=/usr/lib/hadoop/etc/hadoop/security
+
 HOST=`hostname -f`
 
 #Part 1: users,groups, and principals.

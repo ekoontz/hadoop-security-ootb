@@ -21,12 +21,13 @@ chown root:root /var/kerberos/krb5kdc
 
 yum -y install krb5-server
 
+cat etc/hadoop/krb5.conf | sed s/\\\${MASTER_HOST}/`hostname -f`/  > /etc/krb5.conf
+
 kdb5_util create -r HADOOP.LOCALDOMAIN -s
 
 cp etc/hadoop/kdc.conf  /var/kerberos/krb5kdc
 
 /etc/init.d/krb5kdc start
-
 
 echo "modprinc -maxrenewlife 1week K/M@HADOOP.LOCALDOMAIN" | kadmin.local
 echo "modprinc -maxrenewlife 1week krbtgt/HADOOP.LOCALDOMAIN@HADOOP.LOCALDOMAIN" | kadmin.local

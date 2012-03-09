@@ -1,6 +1,6 @@
 <configuration>
   <!-- _TEMPLATE: This template file requires substitution of the following variables:
-       _TEMPLATE: ${MASTER}, ${SLAVE} (on single-node test, ${MASTER} == ${SLAVE}).
+       _TEMPLATE: MASTER
        _TEMPLATE: -->
    <property>
     <name>fs.defaultFS</name>
@@ -42,7 +42,7 @@
   <property>
     <description>Address where the localizer IPC is.</description>
     <name>yarn.nodemanager.localizer.address</name>
-    <value>${SLAVE}:8042</value>
+    <value>localhost:8042</value>
   </property>
 
   <property>
