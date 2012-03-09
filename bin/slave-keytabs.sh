@@ -1,6 +1,12 @@
 #!/bin/sh
-
+# run on master.
 #TODO: add yarn support (not just hdfs)                                                            
+
+if [ -z $SLAVE ]; then
+    echo "you must define \$SLAVE in your environment."
+    exit
+fi
+
 
 rm -f etc/host.slave.keytab
 rm -f etc/hdfs.slave.keytab

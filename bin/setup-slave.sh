@@ -1,7 +1,9 @@
-#!/usr/bin/env bash                                                                                                                                       
-bin=`which $0`
-bin=`dirname ${bin}`
-bin=`cd "$bin"; pwd`
+#!/usr/bin/env bash                                                                                
+
+if [ -z $MASTER ]; then
+    echo "you must define \$MASTER in your environment."
+    exit
+fi
 
 ETC=$bin/../etc/hadoop
 cat $ETC/core-site.template.xml | sed s/\\\${MASTER}/$MASTER/g \
