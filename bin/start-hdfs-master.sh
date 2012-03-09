@@ -4,7 +4,7 @@ bin=/usr/lib/hadoop/bin
 
 # <look in source directory's classes first to avoid need to recompile and package everything. -->
 export HADOOP_USER_CLASSPATH_FIRST=true
-export HADOOP_CLASSPATH=/home/ec2-user/hadoop-common/hadoop-hdfs-project/hadoop-hdfs/target/classes
+export HADOOP_CLASSPATH=$HOME/hadoop-common/hadoop-hdfs-project/hadoop-hdfs/target/classes
 
 export HADOOP_SECURE_DN_USER=hdfs
 
