@@ -32,7 +32,10 @@ ln -s $HADOOP_ETC/core-site.xml $HADOOP_ETC/yarn-site.xml
 sudo rm /usr/lib/hadoop/etc/hadoop/security/*.keytab
 sudo mkdir -p /usr/lib/hadoop/etc/hadoop/security
 sudo scp -i $SSH_PRIVATE_KEY ec2-user@$MASTER:hadoop-security-ootb/etc/hdfs.slave.keytab /usr/lib/hadoop/etc/hadoop/security/hdfs.keytab
+sudo scp -i $SSH_PRIVATE_KEY ec2-user@$MASTER:hadoop-security-ootb/etc/yarn.slave.keytab /usr/lib/hadoop/etc/hadoop/security/yarn.keytab
+sudo chown yarn /usr/lib/hadoop/etc/hadoop/security/yarn.keytab
 
-#test that keytab works.
+#test that keytabs work.
 set -x
 kinit -k -t /usr/lib/hadoop/etc/hadoop/security/hdfs.keytab hdfs/`hostname -f`
+kinit -k -t /usr/lib/hadoop/etc/hadoop/security/yarn.keytab yarn/`hostname -f`
