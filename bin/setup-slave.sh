@@ -5,8 +5,8 @@ if [ -z $MASTER ]; then
     exit
 fi
 
-if [ !-f /home/ec2-user/.ssh/ms-shared ]; then
-    echo "you must have the master's private key in your environment so that the keytab may be fetched."
+if [ !-f $HOME/.ssh/ms-shared ]; then
+    echo "you must have the master's private key in $HOME/.ssh so that the keytab may be fetched."
     exit
 fi
 
