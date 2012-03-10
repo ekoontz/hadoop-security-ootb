@@ -14,20 +14,7 @@ bin=`which $0`
 bin=`dirname ${bin}`
 bin=`cd "$bin"; pwd`
 
-LOCAL_ETC=$bin/../etc/hadoop
-HADOOP_ETC=/usr/lib/hadoop/etc/hadoop
-ETC=/etc
-
-cat $LOCAL_ETC/krb5.conf | sed s/\\\${MASTER_HOST}/$MASTER/  > $ETC/krb5.conf
-
-cat $LOCAL_ETC/core-site.template.xml | sed s/\\\${MASTER}/$MASTER/g \
-| sed s/\\\${SLAVE}/`hostname -f`/g \
-| grep -v _TEMPLATE > $HADOOP_ETC/core-site.xml
-
-mv $HADOOP_ETC/hdfs-site.xml /tmp
-ln -s $HADOOP_ETC/core-site.xml $HADOOP_ETC/hdfs-site.xml
-mv $HADOOP_ETC/yarn-site.xml /tmp
-ln -s $HADOOP_ETC/core-site.xml $HADOOP_ETC/yarn-site.xml
+sudo $bin/setup-hadoop-config.sh
 
 sudo rm /usr/lib/hadoop/etc/hadoop/security/*.keytab
 sudo mkdir -p /usr/lib/hadoop/etc/hadoop/security
