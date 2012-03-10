@@ -16,7 +16,7 @@ bin=`cd "$bin"; pwd`
 
 sudo $bin/setup-hadoop-config.sh
 
-sudo rm /usr/lib/hadoop/etc/hadoop/security/*.keytab
+sudo rm /usr/lib/hadoop/etc/hadoop/security/*
 sudo mkdir -p /usr/lib/hadoop/etc/hadoop/security
 sudo scp -i $SSH_PRIVATE_KEY ec2-user@$MASTER:hadoop-security-ootb/etc/hdfs.slave.keytab /usr/lib/hadoop/etc/hadoop/security/hdfs.keytab
 sudo scp -i $SSH_PRIVATE_KEY ec2-user@$MASTER:hadoop-security-ootb/etc/yarn.slave.keytab /usr/lib/hadoop/etc/hadoop/security/yarn.keytab
