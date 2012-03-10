@@ -22,7 +22,7 @@ sudo su - -c "MASTER=$MASTER /home/ec2-user/hadoop-security-ootb/bin/setup-hadoo
 
 RESULT=$?
 
-if [ ! -z $RESULT ]; then
+if [ $RESULT -gt 0 ]; then
     exit $RESULT
 fi
 
