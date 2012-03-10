@@ -1,12 +1,17 @@
 #!/bin/sh
-# run on master.
-#TODO: add yarn support (not just hdfs)                                                            
+# run on master as:
+# $ sudo su - -c "SLAVE=$SLAVE /home/ec2-user/hadoop-security-ootb/bin/slave-keytabs.sh "
 
 if [ -z $SLAVE ]; then
     echo "you must define \$SLAVE in your environment."
     exit
 fi
 
+bin=`which $0`
+bin=`dirname ${bin}`
+bin=`cd "$bin"; pwd`
+
+cd $bin/..
 
 rm -f etc/host.slave.keytab
 rm -f etc/hdfs.slave.keytab
@@ -43,4 +48,5 @@ chmod 400 etc/hdfs.slave.keytab
 
 chown ec2-user etc/yarn.slave.keytab
 chmod 400 etc/yarn.slave.keytab
+
 
