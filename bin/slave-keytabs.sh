@@ -1,10 +1,10 @@
 #!/bin/sh
 # run on master as:
 # $ sudo su - -c "SLAVE=$SLAVE /home/ec2-user/hadoop-security-ootb/bin/slave-keytabs.sh "
-
+set -x
 if [ -z $SLAVE ]; then
     echo "you must define \$SLAVE in your environment."
-    exit
+    exit 1
 fi
 
 bin=`which $0`
