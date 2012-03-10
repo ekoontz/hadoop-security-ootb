@@ -14,7 +14,8 @@ bin=`which $0`
 bin=`dirname ${bin}`
 bin=`cd "$bin"; pwd`
 
-sudo cat $bin/../etc/hadoop/krb5.conf | sed s/\\\${MASTER_HOST}/`hostname -f`/  > /etc/krb5.conf
+cat $bin/../etc/hadoop/krb5.conf | sed s/\\\${MASTER_HOST}/$MASTER/  >  $bin/../etc/krb5.conf
+sudo cp $bin/../etc/krb5.conf /etc
 
 sudo $bin/setup-hadoop-config.sh
 
