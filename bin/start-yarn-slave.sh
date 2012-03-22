@@ -6,5 +6,5 @@ sudo pkill -f NodeManager
 sudo mkdir -p /tmp/hadoop/nm-local-dirs
 sudo chown -R yarn /tmp/hadoop/nm-local-dirs
 
-sudo su yarn -c "JAVA_HOME=$JAVA_HOME $bin/yarn nodemanager &"
+sudo su yarn -c "JAVA_HOME=$JAVA_HOME $bin/yarn nodemanager"
 
