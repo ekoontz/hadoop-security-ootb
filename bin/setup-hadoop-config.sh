@@ -3,8 +3,9 @@ bin=`which $0`
 bin=`dirname ${bin}`
 bin=`cd "$bin"; pwd`
 if [ -z $MASTER ]; then
-    echo "you must define \$MASTER in your environment."
-    exit 1
+    HOSTNAME=`hostname -f`
+    echo "Master not defined in your environment: assuming that this host ($HOSTNAME)."
+    export MASTER=$HOSTNAME
 fi
 
 LOCAL_ETC=$bin/../etc/hadoop
