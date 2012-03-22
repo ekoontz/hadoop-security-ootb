@@ -1,0 +1,48 @@
+Getting Started
+---------------
+
+These scripts run on pre-existing remote hosts. Create your master and slave instances first.
+Take note of the IP addresses of the $MASTER and $SLAVE.
+
+pushd . ; cd .. ; scp -r hadoop-security-ootb $MASTER: ;  popd
+ssh $MASTER "./hadoop-security-ootb/bin/start-master.sh"
+
+for each slave $SLAVE:
+
+pushd . ; cd .. ; scp -r hadoop-security-ootb $SLAVE: ;  popd
+ssh $SLAVE "export MASTER=$MASTER ./hadoop-security-ootb/bin/start-slave.sh"
+
+Design
+------
+
+The top-level scripts mentioned above (start-master.sh and start-slave.sh), have the following dependencies:
+
+start-master.sh
+|
+|\
+| `shutdown.sh
+|\
+| `setup-master.sh
+|  |
+|  |`-krb5.sh
+|  |
+|  |`-setup-hadoop-config.sh
+|  |
+|  `-permissions.sh
+|\
+| `-start-hdfs-master.sh
+ \
+  `-start-yarn-master.sh
+
+
+start-slave.sh
+|
+|\
+| `-shutdown-slave.sh
+|\
+| `-setup-slave.sh
+|\
+| `-start-hdfs-slave.sh
+ \
+  `-start-yarn-slave.sh
+
