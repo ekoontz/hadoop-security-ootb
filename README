@@ -1,16 +1,21 @@
 Getting Started
 ---------------
 
-These scripts run on pre-existing remote hosts. Create your master and slave instances first.
-Take note of the IP addresses of the $MASTER and $SLAVE.
+These scripts run on pre-existing instances: create your master and slave instances first.
+Take note of the IP addresses of the master and slaves: set $MASTER to the former and $SLAVES (separated by spaces) to the latter
+
+Starting master
 
 pushd . ; cd .. ; scp -r hadoop-security-ootb $MASTER: ;  popd
 ssh $MASTER "./hadoop-security-ootb/bin/start-master.sh"
 
-for each slave $SLAVE:
+Starting slaves
 
-pushd . ; cd .. ; scp -r hadoop-security-ootb $SLAVE: ;  popd
-ssh $SLAVE "export MASTER=$MASTER ./hadoop-security-ootb/bin/start-slave.sh"
+for SLAVE in $SLAVES
+do
+    pushd . ; cd .. ; scp -r hadoop-security-ootb $SLAVE: ;  popd
+    ssh $SLAVE "export MASTER=$MASTER ./hadoop-security-ootb/bin/start-slave.sh"
+done
 
 Design
 ------
