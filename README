@@ -33,7 +33,7 @@ start-master.sh
 |  |
 |  |`-setup-hadoop-config.sh
 |  |
-|  `-permissions.sh
+|   `-permissions.sh
 |\
 | `-start-hdfs-master.sh
  \
